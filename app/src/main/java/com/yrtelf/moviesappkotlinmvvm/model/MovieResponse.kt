@@ -2,7 +2,7 @@ package com.yrtelf.moviesappkotlinmvvm.model
 
 import com.google.gson.annotations.SerializedName
 
-data class  MovieResponse(
+data class MovieResponse(
     val page: Int,
     @SerializedName("results")
     val movieList: List<Movie>,
