@@ -27,6 +27,9 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, Injection.provideMovieDetailViewModelFactory()).get(
             MovieDetailViewModel::class.java
         )
+        activityMovieDetailBinding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
         viewModel.movie = movie
         activityMovieDetailBinding.viewModel = viewModel
 

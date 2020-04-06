@@ -13,11 +13,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.MovieListActivity">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="#23DCE3" >
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:queryHint="Search for movies"/>
+        </androidx.appcompat.widget.Toolbar>
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_movies"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             tools:listitem="@layout/movies_list_item"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

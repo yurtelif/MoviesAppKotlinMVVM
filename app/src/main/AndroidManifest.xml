@@ -14,7 +14,8 @@
         <activity android:name=".ui.MovieDetailActivity"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
-        <activity android:name=".ui.MovieListActivity">
+        <activity android:name=".ui.MovieListActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

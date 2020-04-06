@@ -1,19 +1,20 @@
 package com.yrtelf.moviesappkotlinmvvm.ui
 
 import android.os.Bundle
+import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.yrtelf.moviesappkotlinmvvm.R
 import com.yrtelf.moviesappkotlinmvvm.adapter.MovieListAdapter
-import com.yrtelf.moviesappkotlinmvvm.base.BaseActivity
 import com.yrtelf.moviesappkotlinmvvm.databinding.ActivityMovieListBinding
 import com.yrtelf.moviesappkotlinmvvm.injection.Injection
 import com.yrtelf.moviesappkotlinmvvm.model.Movie
 import com.yrtelf.moviesappkotlinmvvm.viewModel.MovieListViewModel
 
-class MovieListActivity : BaseActivity() {
+class MovieListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MovieListViewModel
     private lateinit var activityMovieListBinding: ActivityMovieListBinding
@@ -35,5 +36,33 @@ class MovieListActivity : BaseActivity() {
         viewModel.movies.observe(this, Observer<List<Movie>> {
             movieListAdapter.update(it)
         })
+
+        performSearchListener()
+    }
+
+    private fun performSearchListener() {
+        activityMovieListBinding.searchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query?.length!! > 2) {
+                    filter(query)
+                }
+                return true
+            }
+        })
+    }
+
+    fun filter(text: String) {
+        val filteredMovieList: ArrayList<Movie> = ArrayList()
+        viewModel.movies.value?.forEach {
+            if (it.title.toUpperCase().contains(text.toUpperCase())) {
+                filteredMovieList.add(it)
+            }
+        }
+        movieListAdapter.update(filteredMovieList)
     }
 }
