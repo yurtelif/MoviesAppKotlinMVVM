@@ -7,5 +7,5 @@ import com.yrtelf.moviesappkotlinmvvm.model.Movie
 
 class MovieDetailViewModel() : ViewModel() {
 
-    var movie: Movie? = Movie("", "", "", "", "")
+    var movie: Movie? = Movie("", "", "", "", "",0)
 }

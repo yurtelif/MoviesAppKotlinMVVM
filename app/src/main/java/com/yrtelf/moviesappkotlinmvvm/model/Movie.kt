@@ -7,7 +7,8 @@ data class Movie(
     val poster_path: String,
     val overview: String,
     val popularity: String,
-    val vote_average: String
+    val vote_average: String,
+    val id: Int
 ) : Serializable
 
 const val MOVIE = "movie"

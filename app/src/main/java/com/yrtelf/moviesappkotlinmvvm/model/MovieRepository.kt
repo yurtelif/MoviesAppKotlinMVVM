@@ -14,8 +14,8 @@ class MovieRepository : MovieDataSource {
 
     private var call: Call<MovieResponse>? = null
 
-    override fun retrieveMovies(callback: OperationCallback<Movie>) {
-        call = MoviesApi.build()?.getMovies()
+    override fun retrieveMovies(page: Int,callback: OperationCallback<Movie>) {
+        call = MoviesApi.build()?.getMovies(page)
         call?.enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>?, t: Throwable?) {
                 callback.onError(t?.message)

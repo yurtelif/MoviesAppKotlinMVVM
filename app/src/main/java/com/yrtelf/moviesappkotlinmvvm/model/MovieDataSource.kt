@@ -1,7 +1,7 @@
 package com.yrtelf.moviesappkotlinmvvm.model
 
 interface MovieDataSource{
-    fun retrieveMovies(callback: OperationCallback<Movie>)
+    fun retrieveMovies(page: Int, callback: OperationCallback<Movie>)
     fun cancel()
 }
 

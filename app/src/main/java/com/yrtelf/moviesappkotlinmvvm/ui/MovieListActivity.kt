@@ -13,6 +13,7 @@ import com.yrtelf.moviesappkotlinmvvm.databinding.ActivityMovieListBinding
 import com.yrtelf.moviesappkotlinmvvm.injection.Injection
 import com.yrtelf.moviesappkotlinmvvm.model.Movie
 import com.yrtelf.moviesappkotlinmvvm.viewModel.MovieListViewModel
+import kotlinx.android.synthetic.main.activity_movie_list.*
 
 class MovieListActivity : AppCompatActivity() {
 
@@ -30,13 +31,13 @@ class MovieListActivity : AppCompatActivity() {
         )
         viewModel.loadMovies()
 
-        movieListAdapter = MovieListAdapter(this, viewModel.movies.value ?: emptyList())
-        activityMovieListBinding.rvMovies.layoutManager = GridLayoutManager(this, 2)
-        activityMovieListBinding.rvMovies.adapter = movieListAdapter
+        movieListAdapter = MovieListAdapter(this, ArrayList(viewModel.movies.value))
+        rv_movies.layoutManager = GridLayoutManager(this, 2)
+        rv_movies.adapter = movieListAdapter
         viewModel.movies.observe(this, Observer<List<Movie>> {
-            movieListAdapter.update(it)
+            movieListAdapter.update(ArrayList(it))
         })
-
+        btn_load_more.setOnClickListener { viewModel.loadMovies() }
         performSearchListener()
     }
 
