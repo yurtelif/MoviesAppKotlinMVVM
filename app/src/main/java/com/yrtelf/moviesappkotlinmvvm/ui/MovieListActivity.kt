@@ -1,6 +1,7 @@
 package com.yrtelf.moviesappkotlinmvvm.ui
 
 import android.os.Bundle
+import android.widget.Filter
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -35,7 +36,7 @@ class MovieListActivity : AppCompatActivity() {
         rv_movies.layoutManager = GridLayoutManager(this, 2)
         rv_movies.adapter = movieListAdapter
         viewModel.movies.observe(this, Observer<List<Movie>> {
-            movieListAdapter.update(ArrayList(it))
+            movieListAdapter.update(ArrayList(it),false)
         })
         btn_load_more.setOnClickListener { viewModel.loadMovies() }
         performSearchListener()
@@ -50,20 +51,11 @@ class MovieListActivity : AppCompatActivity() {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query?.length!! > 2) {
-                    filter(query)
+                    movieListAdapter.filter(query)
                 }
                 return true
             }
         })
     }
 
-    fun filter(text: String) {
-        val filteredMovieList: ArrayList<Movie> = ArrayList()
-        viewModel.movies.value?.forEach {
-            if (it.title.toUpperCase().contains(text.toUpperCase())) {
-                filteredMovieList.add(it)
-            }
-        }
-        movieListAdapter.update(filteredMovieList)
-    }
 }

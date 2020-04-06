@@ -54,7 +54,6 @@
                     android:layout_marginLeft="60dp"
                     android:layout_marginRight="60dp"
                     android:background="#FFD53B"
-                    android:visibility="gone"
                     android:text="Load More"
                     android:textColor="#000000" />
             </LinearLayout>

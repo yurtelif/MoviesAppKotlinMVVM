@@ -38,9 +38,23 @@ class MovieListAdapter(
     }
 
 
-    fun update(data: ArrayList<Movie>) {
-        movies.addAll(data)
+    fun update(data: ArrayList<Movie>, fromFilter: Boolean) {
+        if(fromFilter){
+            movies = data
+        } else {
+            movies.addAll(data)
+        }
         notifyDataSetChanged()
+    }
+
+    fun filter(text: String) {
+        val filteredMovieList: ArrayList<Movie> = ArrayList()
+        movies.forEach {
+            if (it.title.toUpperCase().contains(text.toUpperCase())) {
+                filteredMovieList.add(it)
+            }
+        }
+        update(filteredMovieList,true)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
